@@ -1,5 +1,6 @@
 import "./core/Game";
 import { InputHandler } from "./core/InputHandler";
+import { Renderer } from "./core/Renderer";
 import { Ship } from "./entities/Ship";
 
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
@@ -13,13 +14,14 @@ canvas.width = 800;
 canvas.height = 600;
 
 const ship = new Ship();
-const inputHandler = new InputHandler(ship);
+new InputHandler(ship);
+const renderer = new Renderer(ctx);
 
 function gameLoop() {
     if (!ctx) return; // Sicherheitshalber nochmal prüfen
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ship.update();
-    ship.draw(ctx);
+    renderer.render(ship); 
     requestAnimationFrame(gameLoop);
 }
 

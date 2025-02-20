@@ -24,11 +24,4 @@ export class Bullet {
             this.isAlive = false;
         }
     }
-
-    draw(ctx: CanvasRenderingContext2D) {
-        ctx.fillStyle = "white";
-        ctx.beginPath();
-        ctx.arc(this.position.x, this.position.y, 2, 0, Math.PI * 2);
-        ctx.fill();
-    }
 }

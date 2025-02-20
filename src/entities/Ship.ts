@@ -35,22 +35,6 @@ export class Ship {
         this.bullets = this.bullets.filter((bullet) => bullet.isAlive);
     }
 
-    draw(ctx: CanvasRenderingContext2D) {
-        ctx.save();
-        ctx.translate(this.position.x, this.position.y);
-        ctx.rotate(this.angle);
-        ctx.beginPath();
-        ctx.moveTo(10, 0);
-        ctx.lineTo(-10, -5);
-        ctx.lineTo(-10, 5);
-        ctx.closePath();
-        ctx.strokeStyle = "white";
-        ctx.stroke();
-        ctx.restore();
-
-        this.bullets.forEach((bullet) => bullet.draw(ctx));
-    }
-
     shoot() {
         const bullet = new Bullet(this.position, this.angle);
         this.bullets.push(bullet);
