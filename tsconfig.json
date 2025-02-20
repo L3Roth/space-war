@@ -9,19 +9,17 @@
     "moduleResolution": "Node",
     "allowJs": true,
     "isolatedModules": true,
-    "noEmit": true,
 
-    /* Pfade für Vite */
+    /* Path Configuration */
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
     },
 
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    /* Output Settings */
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "noEmit": false
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

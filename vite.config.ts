@@ -1,8 +1,11 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  root: "public", // Falls index.html in public liegt
   build: {
-    outDir: "../dist",
+    outDir: "dist",
+    emptyOutDir: true,
+  },
+  server: {
+    open: true, // Automatically open the browser
   },
 });
