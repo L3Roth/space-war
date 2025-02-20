@@ -22,6 +22,9 @@ export class InputHandler {
         if(this.keys.has("ArrowRight")) {
             this.ship.angle += 0.1;
         }
+        if (event.code === "Space") {
+            this.ship.shoot();
+        }
     }
 
     private keyUp(event: KeyboardEvent) {
