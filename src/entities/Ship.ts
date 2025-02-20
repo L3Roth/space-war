@@ -1,3 +1,4 @@
+import { Physics } from "../core/Physics";
 import { Vector } from "../utils/Vector";
 import { Bullet } from "./Bullet";
 
@@ -25,8 +26,9 @@ export class Ship {
         } else {
             this.acceleration = new Vector(0, 0);
         }
-        this.velocity = this.velocity.add(this.acceleration);
-        this.position = this.position.add(this.velocity);
+        const result = Physics.applyMovement(this.position, this.velocity, this.acceleration);
+        this.velocity = result.velocity;
+        this.position = result.position;
 
         this.bullets.forEach((bullet) => bullet.update());
 
