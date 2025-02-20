@@ -1,4 +1,5 @@
 import "./core/Game";
+import { InputHandler } from "./core/InputHandler";
 import { Ship } from "./entities/Ship";
 
 const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
@@ -12,6 +13,7 @@ canvas.width = 800;
 canvas.height = 600;
 
 const ship = new Ship();
+const inputHandler = new InputHandler(ship);
 
 function gameLoop() {
     if (!ctx) return; // Sicherheitshalber nochmal prüfen
