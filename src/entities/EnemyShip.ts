@@ -1,7 +1,7 @@
 import { BaseShip } from "./BaseShip";
 
-export class Ship extends BaseShip {
+export class EnemyShip extends BaseShip {
     constructor() {
-        super(400, 300, 0); // Start position & facing direction
+        super(600, 300, Math.PI); // Opposite position & direction
     }
 }
