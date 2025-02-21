@@ -1,3 +1,4 @@
+import { EnemyShip } from "@/entities/EnemyShip";
 import { Ship } from "@/entities/Ship";
 
 export class Renderer {
@@ -11,24 +12,42 @@ export class Renderer {
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     }
 
-    render(ship: Ship) {
+    render(ship: Ship | EnemyShip) {
         this.clearCanvas();
-        this.drawShip(ship);
+
+        if(ship instanceof Ship) {
+            this.drawShip(ship);
+        } else if(ship instanceof EnemyShip) {
+            this.drawEnemyShip(ship)
+        }
+        
         this.drawBullets(ship);
     }
 
     private drawShip(ship: Ship) {
-        ctx.save();
-        ctx.translate(ship.position.x, ship.position.y);
-        ctx.rotate(ship.angle);
-        ctx.beginPath();
-        ctx.moveTo(10, 0);
-        ctx.lineTo(-10, -5);
-        ctx.lineTo(-10, 5);
-        ctx.closePath();
-        ctx.strokeStyle = "white";
-        ctx.stroke();
-        ctx.restore();
+        this.ctx.save();
+        this.ctx.translate(ship.position.x, ship.position.y);
+        this.ctx.rotate(ship.angle);
+        this.ctx.beginPath();
+        this.ctx.moveTo(10, 0);
+        this.ctx.lineTo(-10, -5);
+        this.ctx.lineTo(-10, 5);
+        this.ctx.closePath();
+        this.ctx.strokeStyle = "white";
+        this.ctx.stroke();
+        this.ctx.restore();
+    }
+
+    private drawEnemyShip(ship: EnemyShip) {
+        this.ctx.save();
+        this.ctx.translate(ship.position.x, ship.position.y);
+        this.ctx.rotate(ship.angle);
+        this.ctx.beginPath();
+        this.ctx.ellipse(0, 0, 15, 8, 0, 0, Math.PI * 2);
+        this.ctx.closePath();
+        this.ctx.strokeStyle = "red";
+        this.ctx.stroke();
+        this.ctx.restore();
     }
 
     private drawBullets(ship: Ship) {
