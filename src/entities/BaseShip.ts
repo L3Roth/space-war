@@ -9,6 +9,8 @@ export class BaseShip {
     angle: number;
     thrusting: boolean;
     bullets: Bullet[];
+    health: number;
+    isExploding: boolean;
 
     constructor(x: number, y: number, angle: number) {
         this.position = new Vector(x, y);
@@ -17,6 +19,8 @@ export class BaseShip {
         this.angle = angle;
         this.thrusting = false;
         this.bullets = [];
+        this.health = 2;
+        this.isExploding = false;
     }
 
     update() {
@@ -38,5 +42,29 @@ export class BaseShip {
     shoot() {
         const bullet = new Bullet(this.position, this.angle);
         this.bullets.push(bullet);
+    }
+
+    takeDamage(callback: () => void) {
+        if(this.isExploding) return;
+
+        console.log(`${this.constructor.name} took damage! Remaining HP: ${this.health - 1}`);
+
+        this.health--;
+        if(this.health === 1) {
+            this.playDamageAnimation()
+        } else if(this.health<=0) {
+            this.playExplosionAnimation(callback)
+        }
+    }
+
+    playDamageAnimation() {
+        console.log("🔥 Ship damaged! Warning animation triggered.");
+        // TODO: Implement damage animation (e.g., ship flickering or color change)
+    }
+
+    playExplosionAnimation(callback: () => void) {
+        console.log("💥 Ship exploded! Playing explosion animation.");
+        this.isExploding = true;
+        setTimeout(callback, 1000);
     }
 }

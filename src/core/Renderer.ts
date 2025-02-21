@@ -29,13 +29,22 @@ export class Renderer {
         this.ctx.save();
         this.ctx.translate(ship.position.x, ship.position.y);
         this.ctx.rotate(ship.angle);
+
+        if(ship.isFlickering && Math.floor(Date.now() / 100) % 2 === 0) {
+            this.ctx.globalAlpha = 0.5 //make it semi-transparent
+        } else {
+            this.ctx.globalAlpha = 1.0
+        }
+
         this.ctx.beginPath();
         this.ctx.moveTo(10, 0);
         this.ctx.lineTo(-10, -5);
         this.ctx.lineTo(-10, 5);
         this.ctx.closePath();
+
         this.ctx.strokeStyle = "white"; // Make sure it's visible
         this.ctx.stroke();
+        this.ctx.globalAlpha = 1.0 // Reset transparency
         this.ctx.restore();
     }
 
@@ -43,10 +52,13 @@ export class Renderer {
         this.ctx.save();
         this.ctx.translate(ship.position.x, ship.position.y);
         this.ctx.rotate(ship.angle);
+
+        const colors = ["red", "orange", "yellow"];
+        this.ctx.strokeStyle = ship.isColorShifted ? colors[ship.colorState] : "red";
+
         this.ctx.beginPath();
         this.ctx.ellipse(0, 0, 15, 8, 0, 0, Math.PI * 2);
         this.ctx.closePath();
-        this.ctx.strokeStyle = "red"; // Ensure visibility
         this.ctx.stroke();
         this.ctx.restore();
     }

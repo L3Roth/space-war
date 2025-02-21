@@ -17,6 +17,9 @@ export class CollisionHandler {
                 console.log(`💥 Collision detected! ${attacker.constructor.name} hit ${target.constructor.name}`);
                 bullet.isAlive = false;
                 //Here we can implement damage or explosion effects
+                target.takeDamage(() => {
+                    console.log(`${target.constructor.name} is destroyed`);
+                })
             }
         });
 
