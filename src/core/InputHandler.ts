@@ -8,8 +8,12 @@ export class InputHandler {
         this.keys = new Set();
         this.controls = controls;
 
-        window.addEventListener("keydown", (event) => this.keyDown(event));
-        window.addEventListener("keyup", (event) => this.keyUp(event));
+        // Remove existing listeners to avoid duplicates
+        window.removeEventListener("keydown", this.keyDown.bind(this));
+        window.removeEventListener("keyup", this.keyUp.bind(this));
+
+        window.addEventListener("keydown", this.keyDown.bind(this));
+        window.addEventListener("keyup", this.keyUp.bind(this));
     }
 
     private keyDown(event: KeyboardEvent) {
